@@ -29,6 +29,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	while (new_node->parent && new_node->n > new_node->parent->n)
 	{
 		int tmp = new_node->n;
+
 		new_node->n = new_node->parent->n;
 		new_node->parent->n = tmp;
 		new_node = new_node->parent;
