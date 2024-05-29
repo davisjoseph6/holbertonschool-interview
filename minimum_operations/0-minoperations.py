@@ -1,4 +1,4 @@
-#!/usr/bini/python3
+#!/usr/bin/python3
 """
 Calculates the number of operations needed
 """
