@@ -11,30 +11,30 @@
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *new_node;
+	heap_t *new_node;
 
-    if (!root)
-        return (NULL);
+	if (!root)
+		return (NULL);
 
-    if (!*root)
-    {
-        *root = binary_tree_node(NULL, value);
-        return (*root);
-    }
+	if (!*root)
+	{
+		*root = binary_tree_node(NULL, value);
+		return (*root);
+	}
 
-    new_node = insert_node(*root, value);
-    if (!new_node)
-        return (NULL);
+	new_node = insert_node(*root, value);
+	if (!new_node)
+		return (NULL);
 
-    while (new_node->parent && new_node->n > new_node->parent->n)
-    {
-        int tmp = new_node->n;
-        new_node->n = new_node->parent->n;
-        new_node->parent->n = tmp;
-        new_node = new_node->parent;
-    }
+	while (new_node->parent && new_node->n > new_node->parent->n)
+	{
+		int tmp = new_node->n;
+		new_node->n = new_node->parent->n;
+		new_node->parent->n = tmp;
+		new_node = new_node->parent;
+	}
 
-    return (new_node);
+	return (new_node);
 }
 
 /**
@@ -46,22 +46,22 @@ heap_t *heap_insert(heap_t **root, int value)
  */
 heap_t *insert_node(heap_t *root, int value)
 {
-    heap_t *new_node;
-    heap_t *parent = find_parent(root);
+	heap_t *new_node;
+	heap_t *parent = find_parent(root);
 
-    if (!parent)
-        return (NULL);
+	if (!parent)
+		return (NULL);
 
-    new_node = binary_tree_node(parent, value);
-    if (!new_node)
-        return (NULL);
+	new_node = binary_tree_node(parent, value);
+	if (!new_node)
+		return (NULL);
 
-    if (!parent->left)
-        parent->left = new_node;
-    else
-        parent->right = new_node;
+	if (!parent->left)
+		parent->left = new_node;
+	else
+		parent->right = new_node;
 
-    return (new_node);
+	return (new_node);
 }
 
 /**
@@ -72,32 +72,32 @@ heap_t *insert_node(heap_t *root, int value)
  */
 heap_t *find_parent(heap_t *root)
 {
-    heap_t *parent;
-    heap_t **queue;
-    size_t front, rear, size;
+	heap_t *parent;
+	heap_t **queue;
+	size_t front, rear, size;
 
-    if (!root)
-        return (NULL);
+	if (!root)
+		return (NULL);
 
-    size = tree_size(root);
-    queue = malloc(size * sizeof(*queue));
-    if (!queue)
-        return (NULL);
+	size = tree_size(root);
+	queue = malloc(size * sizeof(*queue));
+	if (!queue)
+		return (NULL);
 
-    front = rear = 0;
-    queue[rear++] = root;
+	front = rear = 0;
+	queue[rear++] = root;
 
-    while (front < rear)
-    {
-        parent = queue[front++];
-        if (!parent->left || !parent->right)
-            break;
-        queue[rear++] = parent->left;
-        queue[rear++] = parent->right;
-    }
+	while (front < rear)
+	{
+		parent = queue[front++];
+		if (!parent->left || !parent->right)
+			break;
+		queue[rear++] = parent->left;
+		queue[rear++] = parent->right;
+	}
 
-    free(queue);
-    return (parent);
+	free(queue);
+	return (parent);
 }
 
 /**
@@ -108,8 +108,7 @@ heap_t *find_parent(heap_t *root)
  */
 size_t tree_size(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    return (1 + tree_size(tree->left) + tree_size(tree->right));
+	if (!tree)
+		return (0);
+	return (1 + tree_size(tree->left) + tree_size(tree->right));
 }
-

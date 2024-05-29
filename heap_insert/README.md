@@ -44,4 +44,4 @@ typedef struct binary_tree_s heap_t;
 Print function
 To match the examples in the tasks, you are given this function
 
-This function is used only for visualisation purpose. You don’t have to push it to your repo. It may not be used during the correction
+This function is used only for visualisation purpose. You don’t have to push it to your repo. It may not be used during the correction.
