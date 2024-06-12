@@ -47,7 +47,7 @@ static int is_stable(int grid[3][3]) {
 
 static void topple(int grid[3][3]) {
 	int i, j;
-	int temp[3][3] = {0};
+	int temp[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
 	/* Distribute grains */
 	for (i = 0; i < 3; i++) {
