@@ -31,14 +31,16 @@ listint_t *reverse_list(listint_t * head)
  */
 int is_palindrome(listint_t **head)
 {
+	listint *slow, *fast, *first_half, *second_half, *second_half_reversed, *first, *second;
 	if (head == NULL || *head == NULL)
 		return(1);
 
-	listint_t *slow = *head;
-	listint_t *fast = *head;
-	listint_t *first_half = *head;
-	listint_t *second_half = NULL;
-	listint_t *second_half_reversed = NULL;
+	*slow = *head;
+	*fast = *head;
+	*first_half = *head;
+	*second_half = NULL;
+	*second_half_reversed = NULL;
+	is_palindrome = 1;
 
 	/* Find the middle of the list */
 	while (fast != NULL && fast->next != NULL)
