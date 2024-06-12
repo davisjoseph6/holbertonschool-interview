@@ -36,6 +36,8 @@ int is_palindrome(listint_t **head)
 	listint_t *first_half = *head;
 	listint_t *second_half = NULL;
 	listint_t *second_half_reversed = NULL;
+	listint_t *first;
+	listint_t *second;
 	int is_palindrome = 1;
 
 	if (head == NULL || *head == NULL)
@@ -53,8 +55,8 @@ int is_palindrome(listint_t **head)
 	second_half_reversed = reverse_list(second_half);
 
 	/* Compare the first half and the reversed second half */
-	listint_t *first = first_half;
-	listint_t *second = second_half_reversed;
+	first = first_half;
+	second = second_half_reversed;
 
 	while (second != NULL)
 	{
