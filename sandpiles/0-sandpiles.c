@@ -54,7 +54,7 @@ static void print_grid(int grid[3][3])
  *
  * Return: 1 if stable, 0 otherwise
  */
-static int is_stable(int grid[3][3])
+int is_stable(int grid[3][3])
 {
 	int i, j;
 
@@ -75,7 +75,7 @@ static int is_stable(int grid[3][3])
  * topple - Topples a sandpile
  * @grid: 3x3 grid to topple
  */
-static void topple(int grid[3][3])
+void topple(int grid[3][3])
 {
 	int i, j;
 	int temp[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
