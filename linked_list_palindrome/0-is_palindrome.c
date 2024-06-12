@@ -7,7 +7,7 @@
  *
  * Return: pointer to the new head of the reversed list.
  */
-listint_t *reverse_list(listint_t * head)
+listint_t *reverse_list(listint_t *head)
 {
 	listint_t *prev = NULL;
 	listint_t *current = head;
@@ -31,16 +31,15 @@ listint_t *reverse_list(listint_t * head)
  */
 int is_palindrome(listint_t **head)
 {
-	listint *slow, *fast, *first_half, *second_half, *second_half_reversed, *first, *second;
-	if (head == NULL || *head == NULL)
-		return(1);
+	listint_t *slow = *head;
+	listint_t *fast = *head;
+	listint_t *first_half = *head;
+	listint_t *second_half = NULL;
+	listint_t *second_half_reversed = NULL;
+	int is_palindrome = 1;
 
-	*slow = *head;
-	*fast = *head;
-	*first_half = *head;
-	*second_half = NULL;
-	*second_half_reversed = NULL;
-	is_palindrome = 1;
+	if (head == NULL || *head == NULL)
+		return 1;
 
 	/* Find the middle of the list */
 	while (fast != NULL && fast->next != NULL)
@@ -56,7 +55,6 @@ int is_palindrome(listint_t **head)
 	/* Compare the first half and the reversed second half */
 	listint_t *first = first_half;
 	listint_t *second = second_half_reversed;
-	int is_palindrome = 1;
 
 	while (second != NULL)
 	{
