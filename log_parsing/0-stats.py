@@ -1,7 +1,14 @@
 #!/usr/bin/python3
 """
-Print the accumulated statistics including total file size and the count
-of each status code.
+Log parsing script that reads stdin line by line and computes metrics.
+
+Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
+(if the format is not this one, the line must be skipped)
+After every 10 lines and/or a keyboard interruption (CTRL + C), print these statistics:
+    - Total file size: File size: <total size>
+    - Number of lines by status code in ascending order:
+      possible status codes: 200, 301, 400, 401, 403, 404, 405, 500
+      (if a status code doesn’t appear or is not an integer, don’t print it)
 """
 
 import sys
@@ -10,8 +17,11 @@ import signal
 
 def print_stats(total_size, status_counts):
     """
-    Print the accumulated statistics including total filze size and the
-    count of each status code
+    Print the statistics of the log parsing.
+    
+    Args:
+        total_size (int): The total file size.
+        status_counts (dict): The count of each status code.
     """
     print(f"File size: {total_size}")
     for code in sorted(status_counts.keys()):
@@ -21,7 +31,11 @@ def print_stats(total_size, status_counts):
 
 def signal_handler(sig, frame):
     """
-    Handled a signal interrupt (e.g., CTRL + C) to print statistics before exiting.
+    Handle the keyboard interrupt signal and print the stats before exiting.
+    
+    Args:
+        sig (int): The signal number.
+        frame (frame object): The current stack frame.
     """
     print_stats(total_size, status_counts)
     sys.exit(0)
@@ -63,8 +77,6 @@ try:
             continue
 
 except KeyboardInterrupt:
-    """
-    placeholder
-    """
     print_stats(total_size, status_counts)
     sys.exit(0)
+
