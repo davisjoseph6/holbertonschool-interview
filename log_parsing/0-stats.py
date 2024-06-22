@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-placeholder
+Print the accumulated statistics including total file size and the count
+of each status code.
 """
 
 import sys
@@ -9,7 +10,8 @@ import signal
 
 def print_stats(total_size, status_counts):
     """
-    placeholder
+    Print the accumulated statistics including total filze size and the
+    count of each status code
     """
     print(f"File size: {total_size}")
     for code in sorted(status_counts.keys()):
@@ -19,10 +21,11 @@ def print_stats(total_size, status_counts):
 
 def signal_handler(sig, frame):
     """
-    placeholder
+    Handled a signal interrupt (e.g., CTRL + C) to print statistics before exiting.
     """
     print_stats(total_size, status_counts)
     sys.exit(0)
+
 
 signal.signal(signal.SIGINT, signal_handler)
 
