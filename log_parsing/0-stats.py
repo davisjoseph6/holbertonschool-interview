@@ -1,10 +1,15 @@
 #!/usr/bin/python3
-
+"""
+placeholder
+"""
 import sys
 import signal
 
 
 def print_stats(total_size, status_counts):
+    """
+    placeholder
+    """
     print(f"File size: {total_size}")
     for code in sorted(status_counts.keys()):
         if status_counts[code] > 0:
@@ -12,6 +17,9 @@ def print_stats(total_size, status_counts):
 
 
 def signal_handler(sig, frame):
+    """
+    placeholder
+    """
     print_stats(total_size, status_counts)
     sys.exit(0)
 
