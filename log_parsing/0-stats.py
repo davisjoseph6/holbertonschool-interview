@@ -2,6 +2,7 @@
 """
 placeholder
 """
+
 import sys
 import signal
 
@@ -59,5 +60,8 @@ try:
             continue
 
 except KeyboardInterrupt:
+    """
+    placeholder
+    """
     print_stats(total_size, status_counts)
     sys.exit(0)
