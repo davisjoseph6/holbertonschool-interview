@@ -1,6 +1,6 @@
 # Log Parsing
 
-## Explanation:
+## Explanation:-
 1. Signal Handling: The script uses signal.signal to catch a KeyboardInterrupt (CTRL + C) and print the statistics before exiting.
 2. Initialization: It initializes total_size to track the sum of file sizes and status_counts dictionary to count occurrences of each status code.
 3. Reading and Parsing: The script reads from stdin line by line, splits each line, and validates its format.
