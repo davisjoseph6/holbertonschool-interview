@@ -13,18 +13,18 @@ int slide_line(int *line, size_t size, int direction)
 	{
 		size_t i, j = 0;
 
-		// Slide non-zero values to the left
+		/* Slide non-zero values to the left */
 		for (i = 0; i < size; i++)
 		{
 		if (line[i] != 0)
 		line[j++] = line[i];
 		}
 
-		// Fill the rest of the line with zeros
+		/* Fill the rest of the line with zeros */
 		while (j < size)
 			line[j++] = 0;
 
-		// Merge adjacent equal values
+		/* Merge adjacent equal values */
 		for (i = 0; i < size - 1; i++)
 		{
 			if (line[i] == line[i + 1] && line[i] != 0)
@@ -34,7 +34,7 @@ int slide_line(int *line, size_t size, int direction)
 			}
 		}
 
-		// Slide again to move zeros left after merging
+		/* Slide again to move zeros left after merging */
 		j = 0;
 		for (i = 0; i < size; i++)
 		{
@@ -49,7 +49,7 @@ int slide_line(int *line, size_t size, int direction)
 	{
 		size_t i, j = size -1;
 
-		// Slide non-zero values to the right
+		/* Slide non-zero values to the right */
 		for (i = size; i > 0; i--)
 		{
 			if (line[i - 1] != 0)
@@ -57,11 +57,11 @@ int slide_line(int *line, size_t size, int direction)
 		}
 
 		
-		// Fill the rest of the line with zeros
+		/* Fill the rest of the line with zeros */
 		while (j < size)
 			line[j--] = 0;
 
-		// Merge adjacent equal values
+		/* Merge adjacent equal values */
 		for (i = size; i > 1; i--)
 		{
 			if (line[i - 1] == line[i - 2] && line[i - 1] != 0)
@@ -71,7 +71,7 @@ int slide_line(int *line, size_t size, int direction)
 			}
 		}
 
-		// Slide again to move zeros right after merging
+		/* Slide again to move zeros right after merging */
 		j = size - 1;
 		for (i = size; i > 0; i--)
 		{
