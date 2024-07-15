@@ -1,7 +1,12 @@
 #!/usr/bin/python3
-
+"""
+Interview
+"""
 
 def validUTF8(data):
+    """
+    Interviewe
+    """
     # Number of bytes in the current UTF-8 character
     num_bytes = 0
 
@@ -31,7 +36,7 @@ def validUTF8(data):
                 return False
 
         else:
-            # If we are in the middle of a UTF-8 character, check for continuation
+            # If we r in the middle of a UTF-8 character,check 4 continuation
             if not (byte & mask1 and not (byte & mask2)):
                 return False
 
