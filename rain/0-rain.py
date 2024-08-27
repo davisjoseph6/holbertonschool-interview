@@ -3,6 +3,7 @@
 Module to calculate the amount of rainwater retained between walls.
 """
 
+
 def rain(walls):
     """
     Calculate how much water is retained after it rains.
