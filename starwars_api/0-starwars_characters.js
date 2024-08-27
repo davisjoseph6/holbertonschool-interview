@@ -17,16 +17,26 @@ request(url, function (error, response, body) {
 	const filmData = JSON.parse(body);
 	const characters = filmData.characters;
 
-	characters.forEach(characterUrl => {
-		request(characterUrl, function (error, response, body) {
-			if (error) {
-				console.error(error);
-				return;
-			}
-
-			const characterData = JSON.parse(body);
-			console.log(characterData.name);
+	//Map each character URL to a promise
+	const characterPromises = characters.map(characterUrl => {
+		return new Promise((resolve, reject) => {
+			request(characterUrl, function (error, response, body) {
+				if (error) {
+					reject(error);
+				} else {
+					const characterData = JSON.parse(body);
+					resolve(characterData.name);
+				}
+			});
 		});
 	});
-});
 
+	// Wait for all promises to resolve
+	Promise.all(characterPromises)
+	.then(characterNames => {
+		characterNames.forEach(name => console.log(name));
+	})
+	.catch(error => {
+		console.error(error);
+	});
+});
