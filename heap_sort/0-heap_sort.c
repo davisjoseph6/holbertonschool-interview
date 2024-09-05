@@ -22,13 +22,14 @@ void heapify(int *array, size_t size, int i, size_t n)
 	if (largest != i)
 	{
 		int temp = array[i];
+
 		array[i] = array[largest];
 		array[largest] = temp;
-		print_array(array, size);  // Print after each swap
+		print_array(array, size);  /* Print after each swap */
 
 		heapify(array, size, largest, n);
 	}
-	
+
 }
 
 /**
@@ -41,18 +42,19 @@ void heap_sort(int *array, size_t size)
 	if (size < 2)
 		return;
 
-	// Build the max heap
+	/* Build the max heap */
 	for (int i = size / 2 - 1; i >= 0; i--)
 		heapify(array, size, i, size);
 
-	// Extract elements from the heap one by one
+	/* Extract elements from the heap one by one */
 	for (int i = size - 1; i > 0; i--)
 	{
 		int temp = array[0];
+
 		array[0] = array[i];
 		array[i] = temp;
-		print_array(array, size);  // Print after each swap
-		
+		print_array(array, size);  /* Print after each swap */
+
 		heapify(array, size, 0, i);
 	}
 }
