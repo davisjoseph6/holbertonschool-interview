@@ -4,6 +4,7 @@
 """
 
 import requests
+import sys
 
 
 def count_words(subreddit, word_list, after=None, word_count={}):
@@ -47,7 +48,6 @@ def count_words(subreddit, word_list, after=None, word_count={}):
         return  # Handle exceptions silently for invalid subreddits or other issues
 
 if __name__ == "__main__":
-    import sys
     if len(sys.argv) < 3:
         print(f"Usage: {sys.argv[0]} <subreddit> <list of keywords>")
     else:
