@@ -13,7 +13,7 @@ def count_words(subreddit, word_list, after=None, word_count={}):
     and prints a sorted count of given keywords.
     """
     headers = {'User-Agent': 'Mozilla/5.0'}
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    url = f"https://www.reddit.com/r/programming/hot.json"
 
     params = {'after': after, 'limit': 100}
 
