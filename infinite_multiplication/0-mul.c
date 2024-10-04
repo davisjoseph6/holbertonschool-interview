@@ -1,105 +1,92 @@
-#include "holberton.h"
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <ctype.h>
 /**
- * _isdigit - checks if a string consists of digits
- * @s: the string to check
+ * _isnumber - checks if string is number
  *
- * Return: 1 if all characters are digits, 0 otherwise
+ * @s: string
+ *
+ * Return: 1 if number, 0 if not
  */
-int _isdigit(char *s)
+int _isnumber(char *s)
 {
-	int i = 0;
+	int i, check, d;
 
-	while (s[i])
+	d = 0, check = 1;
+	for (i = 0; *(s + i) != 0; i++)
 	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-/**
- * _strlen - returns the length of a string
- * @s: the string whose length to return
- *
- * Return: the length of the string
- */
-int _strlen(char *s)
-{
-	int len = 0;
-
-	while (s[len])
-		len++;
-	return (len);
-}
-
-/**
- * print_error - prints Error and exits with status 98
- */
-void print_error(void)
-{
-	char *error = "Error\n";
-	while (*error)
-		_putchar(*error++);
-	exit(98);
-}
-
-/**
- * main - multiplies two positive numbers
- * @argc: the number of arguments
- * @argv: the argument vector
- *
- * Return: 0 if successful, 98 if failure
- */
-int main(int argc, char *argv[])
-{
-	char *num1, *num2;
-	int len1, len2, len, i, j, carry, n1, n2, *result;
-
-	if (argc != 3 || !_isdigit(argv[1]) || !_isdigit(argv[2]))
-		print_error();
-
-	num1 = argv[1];
-	num2 = argv[2];
-	len1 = _strlen(num1);
-	len2 = _strlen(num2);
-	len = len1 + len2;
-
-	result = malloc(sizeof(int) * (len));
-	if (!result)
-		return (1);
-	
-	for (i = 0; i < len; i++)
-		result[i] = 0;
-
-	for (i = len1 - 1; i >= 0; i--)
-	{
-		n1 = num1[i] - '0';
-		carry = 0;
-		for (j = len2 - 1; j >= 0; j--)
+		d = isdigit(*(s + i));
+		if (d == 0)
 		{
-			n2 = num2[j] - '0';
-			carry += result[i + j + 1] + n1 * n2;
-			result[i + j + 1] = carry % 10;
-			carry /= 10;
+			check = 0;
+			break;
 		}
-		result[i + j + 1] += carry;
 	}
+	return (check);
+}
 
-	i = 0;
-	while (i < len && result[i] == 0)
-		i++;
+/**
+ * _callocX - reserves memory initialized to 0
+ *
+ * @nmemb: # of bytes
+ *
+ * Return: pointer
+ */
+char *_callocX(unsigned int nmemb)
+{
+	unsigned int i;
+	char *p;
 
-	if (i == len)
-		_putchar('0');
-	
-	while (i < len)
-		_putchar(result[i++] + '0');
-	_putchar('\n');
+	p = malloc(nmemb + 1);
+	if (p == 0)
+		return (0);
+	for (i = 0; i < nmemb; i++)
+		p[i] = '0';
+	p[i] = '\0';
+	return (p);
+}
 
-	free(result);
+/**
+ * main - multiplies inf numbers
+ *
+ * @argc: # of cmd line args
+ * @argv: cmd line args
+ * Return: No return
+ */
+int main(int argc, char **argv)
+{
+	int i, j, l1, l2, lful, mul, add, ten, ten2, tl, zer = 0;
+	char *res;
+
+	if (argc != 3 || _isnumber(argv[1]) == 0 || _isnumber(argv[2]) == 0)
+		printf("Error\n"), exit(98);
+	if (atoi(argv[1]) == 0 || atoi(argv[2]) == 0)
+		printf("0\n"), exit(0);
+	l1 = strlen(argv[1]), l2 = strlen(argv[2]);
+	lful = l1 + l2;
+	res = _callocX(lful);
+	if (res == 0)
+		printf("Error\n"), exit(98);
+	for (i = l2 - 1; i >= 0; i--)
+	{
+		ten = 0, ten2 = 0;
+		for (j = l1 - 1; j >= 0; j--)
+		{
+			tl = i + j + 1;
+			mul = (argv[1][j] - '0') * (argv[2][i] - '0') + ten;
+			ten = mul / 10;
+			add = (res[tl] - '0') + (mul % 10) + ten2;
+			ten2 = add / 10;
+			res[tl] = (add % 10) + '0';
+		}
+		res[tl - 1] = (ten + ten2) + '0';
+	}
+	if (res[0] == '0')
+		zer = 1;
+	for (; zer < lful; zer++)
+		printf("%c", res[zer]);
+	printf("\n");
+	free(res);
 	return (0);
 }
