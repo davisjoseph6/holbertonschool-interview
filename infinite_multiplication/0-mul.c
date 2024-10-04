@@ -37,10 +37,13 @@ int _strlen(char *s)
 }
 
 /**
- * print_error - prints Error and exits with status 98
+ * print_error - prints Error, frees memory (if applicable), and exits with status 98
+ * @result: pointer to memory that needs toe be freed
  */
-void print_error(void)
+void print_error(int *result)
 {
+	if (result)
+		free(result); /* Free the result array if it was allocated */
 	char *error = "Error\n";
 	while (*error)
 		_putchar(*error++);
@@ -57,10 +60,10 @@ void print_error(void)
 int main(int argc, char *argv[])
 {
 	char *num1, *num2;
-	int len1, len2, len, i, j, carry, n1, n2, *result;
+	int len1, len2, len, i, j, carry, n1, n2, *result = NULL;
 
 	if (argc != 3 || !_isdigit(argv[1]) || !_isdigit(argv[2]))
-		print_error();
+		print_error(result);
 
 	num1 = argv[1];
 	num2 = argv[2];
@@ -68,9 +71,9 @@ int main(int argc, char *argv[])
 	len2 = _strlen(num2);
 	len = len1 + len2;
 
-	result = malloc(sizeof(int) * (len));
+	result = malloc(sizeof(int) * len);
 	if (!result)
-		return (1);
+		print_error(result);
 	
 	for (i = 0; i < len; i++)
 		result[i] = 0;

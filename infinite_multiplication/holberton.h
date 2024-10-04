@@ -4,7 +4,6 @@
 int _putchar(char c);
 int _isdigit(char *s);
 int _strlen(char *s);
-void print_error(void);
+void print_error(int *result);
 
 #endif /* HOLBERTON_H */
-
