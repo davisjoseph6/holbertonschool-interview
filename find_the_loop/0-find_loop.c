@@ -23,9 +23,9 @@ listint_t *find_listint_loop(listint_t *head)
 				slow = slow->next;	/* Move both ponters one step */
 				fast = fast->next;
 			}
-			return slow;			/* Start of the loop */
+			return (slow);			/* Start of the loop */
 		}
 	}
 
-	return NULL;					/* No loop found */
+	return (NULL);					/* No loop found */
 }
