@@ -1,0 +1,27 @@
+#ifndef LIST_H
+#define LIST_H
+
+#include <stdlib.h>
+#include <string.h>
+
+/**
+ * struct List - doubly linked list
+ * @str: string - (malloc'ed string)
+ * @prev: points to the previous node
+ * @next: points to the next node
+ *
+ * Description: doubly linked list node structure
+ * for Holberton project
+ */
+typedef struct List
+{
+	char *str;
+	struct List *prev;
+	struct List *next;
+} List;
+
+/* Function Prototypes */
+List *add_node_start(List **list, const char *str);
+List *add_node_end(List **list, const char *str);
+
+#endif /* LIST_H */
