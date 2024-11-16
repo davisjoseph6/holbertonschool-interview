@@ -38,35 +38,43 @@ int _strlen(char *s)
 
 /**
  * print_error - prints Error, frees memory (if applicable), and exits with status 98
- * @result: pointer to memory that needs to be freed
+ * @result: pointer to memory that needs toe be freed
  */
 void print_error(int *result)
 {
-	char *error = "Error\n";
-
 	if (result)
-		free(result);
-
+		free(result); /* Free the result array if it was allocated */
+	char *error = "Error\n";
 	while (*error)
 		_putchar(*error++);
 	exit(98);
 }
 
 /**
- * multiply - multiplies two numbers represented as strings
- * @num1: first number as a string
- * @num2: second number as a string
+ * main - multiplies two positive numbers
+ * @argc: the number of arguments
+ * @argv: the argument vector
  *
- * Return: pointer to result array
+ * Return: 0 if successful, 98 if failure
  */
-int *multiply(char *num1, char *num2, int len1, int len2, int len)
+int main(int argc, char *argv[])
 {
-	int *result = malloc(sizeof(int) * len);
-	int carry, n1, n2, i, j;
+	char *num1, *num2;
+	int len1, len2, len, i, j, carry, n1, n2, *result = NULL;
 
+	if (argc != 3 || !_isdigit(argv[1]) || !_isdigit(argv[2]))
+		print_error(result);
+
+	num1 = argv[1];
+	num2 = argv[2];
+	len1 = _strlen(num1);
+	len2 = _strlen(num2);
+	len = len1 + len2;
+
+	result = malloc(sizeof(int) * len);
 	if (!result)
-		return (NULL);
-
+		print_error(result);
+	
 	for (i = 0; i < len; i++)
 		result[i] = 0;
 
@@ -83,56 +91,18 @@ int *multiply(char *num1, char *num2, int len1, int len2, int len)
 		}
 		result[i + j + 1] += carry;
 	}
-	return (result);
-}
 
-/**
- * print_result - prints the result of multiplication
- * @result: pointer to the result array
- * @len: length of the result array
- */
-void print_result(int *result, int len)
-{
-	int i = 0;
-
+	i = 0;
 	while (i < len && result[i] == 0)
 		i++;
 
 	if (i == len)
 		_putchar('0');
-
+	
 	while (i < len)
 		_putchar(result[i++] + '0');
-
 	_putchar('\n');
-}
 
-/**
- * main - multiplies two positive numbers
- * @argc: the number of arguments
- * @argv: the argument vector
- *
- * Return: 0 if successful, 98 if failure
- */
-int main(int argc, char *argv[])
-{
-	char *num1, *num2;
-	int len1, len2, len, *result;
-
-	if (argc != 3 || !_isdigit(argv[1]) || !_isdigit(argv[2]))
-		print_error(NULL);
-
-	num1 = argv[1];
-	num2 = argv[2];
-	len1 = _strlen(num1);
-	len2 = _strlen(num2);
-	len = len1 + len2;
-
-	result = multiply(num1, num2, len1, len2, len);
-	if (!result)
-		print_error(NULL);
-
-	print_result(result, len);
 	free(result);
 	return (0);
 }
