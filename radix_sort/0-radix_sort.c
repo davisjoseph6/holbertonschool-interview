@@ -11,6 +11,7 @@
 int get_max(int *array, size_t size)
 {
 	int max = array[0];
+
 	for (size_t i = 1; i < size; i++)
 	{
 		if (array[i] > max)
@@ -57,7 +58,8 @@ void counting_sort(int *array, size_t size, int exp)
 }
 
 /**
- * radix_sort - Sorts an array of integers in ascending order using the Radix sort algorithm
+ * radix_sort - Sorts an array of integers in ascending order using the
+ * Radix sort algorithm
  * @array: Array of integers
  * @size: Size of the array
  */
